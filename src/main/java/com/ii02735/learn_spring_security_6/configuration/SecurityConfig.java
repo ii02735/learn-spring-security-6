@@ -11,7 +11,7 @@ import static org.springframework.security.config.Customizer.withDefaults;
 public class SecurityConfig {
 
     /**
-     * Reprise de la bean par défaut de Spring Security depuis {@link org.springframework.boot.autoconfigure.security.servlet.SpringBootWebSecurityConfiguration}
+     * Reprise de la bean par défaut de Spring Security depuis SpringBootWebSecurityConfiguration
      * Cela nous permettra de surcharger la configuration par défaut pour nos propres besoins
      */
     @Bean
@@ -28,8 +28,9 @@ public class SecurityConfig {
          */
 
         // Ne permettre que certaines ressources accessibles publiquement
-        http.authorizeHttpRequests((requests) -> requests.requestMatchers("/").permitAll());
-        http.authorizeHttpRequests((requests) -> requests.requestMatchers("/hello").authenticated());
+        http.authorizeHttpRequests((requests) -> requests
+                .requestMatchers("/").permitAll()
+                .requestMatchers("/hello").authenticated());
 
         http.formLogin(withDefaults());
         http.httpBasic(withDefaults());
