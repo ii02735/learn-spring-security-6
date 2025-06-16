@@ -3,6 +3,7 @@ package com.ii02735.learn_spring_security_6.configuration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.web.SecurityFilterChain;
 
 import static org.springframework.security.config.Customizer.withDefaults;
@@ -32,7 +33,13 @@ public class SecurityConfig {
                 .requestMatchers("/").permitAll()
                 .requestMatchers("/hello").authenticated());
 
+        // Permet d'afficher un formulaire d'authentification (pour utilisateurs) : déclenchera UsernamePasswordAuthenticationFilter
         http.formLogin(withDefaults());
+        /*
+         * Pour désactiver l'authentification via formulaire
+         * http.formLogin(AbstractHttpConfigurer::disable);
+         */
+        // Permet d'accepter l'authentification basic (pour APIs) : déclenchera BasicAuthenticationFilter
         http.httpBasic(withDefaults());
         return http.build();
     }
