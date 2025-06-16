@@ -1,0 +1,12 @@
+services:
+  mariadb:
+    image: mariadb:lts
+    volumes:
+      - spring_security_data:/var/lib/mysql
+    ports:
+      - "3306:3306"
+    environment:
+      MARIADB_ROOT_PASSWORD: root
+
+volumes:
+  spring_security_data:
