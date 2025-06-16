@@ -1,3 +1,16 @@
+### 1.0.1 - 2025-06-16
+
+- Ajout de la property suivante : 
+
+```properties
+spring.security.user.password=password
+```
+
+Permet d'écraser **le mot de passe généré au démarrage de l'application** par un mot de passe **statique**.
+
+- Création de la configuration **SecurityConfig** : il s'agit de la reprise de la configuration proposée par défaut dans la classe **SpringBootWebSecurityConfiguration**
+
+
 ### 1.0.0 - 2025-05-31
 
 - Ajout de **Spring Security** dans les dépendances
