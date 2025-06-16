@@ -4,6 +4,10 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 
 import static org.springframework.security.config.Customizer.withDefaults;
@@ -43,4 +47,18 @@ public class SecurityConfig {
         http.httpBasic(withDefaults());
         return http.build();
     }
+
+    // Bean qui va contenir un inventaire de plusieurs utilisateurs en mémoire
+    // Rappel : l'implémentation UserDetailsService est consulté pour connaître si un utilisateur existe ou pas
+    @Bean
+    public UserDetailsService userDetailsService() {
+        // Une autorité désigne la permission d'un utilisateur
+        // Les autorités saisies ici sont arbitraires
+        // L'ajout de {noop} indique qu'on utilise le password encoder "noop" (NoOpPasswordEncoder, il est obligatoire d'utiliser un password encoder)
+        UserDetails user = User.withUsername("user").password("{noop}password").authorities("read").build();
+        UserDetails admin = User.withUsername("admin").password("{noop}password").authorities("admin").build();
+        // Chaque user sera stocké dans une HashMap de InMemoryUserDetailsManager
+        return new InMemoryUserDetailsManager(user, admin);
+    }
+
 }

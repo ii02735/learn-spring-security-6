@@ -1,3 +1,31 @@
+### 1.1.0 - 2025-06-16
+
+#### :sparkles: Ajout de plusieurs utilisateurs en mémoire
+
+- Création d'une **bean UserDetailsService**
+
+Pour rappel, l'implémentation UserDetailsService a pour rôle, **l'inventaire des utilisateurs disponibles**.
+
+Dans l'exemple, on a créé plusieurs **utilisateurs en mémoire**, durant la déclaration de la bean :
+
+```java
+    @Bean
+    public UserDetailsService userDetailsService() {
+        UserDetails user = User.withUsername("user").password("{noop}password").authorities("read").build();
+        UserDetails admin = User.withUsername("admin").password("{noop}password").authorities("admin").build();
+        return new InMemoryUserDetailsManager(user, admin);
+    }
+```
+
+Comme il s'agit d'une déclaration en mémoire, les utilisateurs seront stockés au sein de l'implémentation **InMemoryUserDetailsManager**.
+
+- Suppression de la property suivante :
+```properties
+spring.security.user.password=password
+```
+
+Cette property n'est plus utile, car on a ajouté plusieurs utilisateurs dans l'application.
+
 ### 1.0.1 - 2025-06-16
 
 - Ajout de la property suivante : 
