@@ -1,3 +1,32 @@
+### 1.2.0 - 2025-06-16
+
+#### :sparkles: Utilisation d'un algorithme pour chiffrer les mots de passe
+
+Car précédemment, les mots de passe étaient stockés en **clair** : ce qui est acceptable dans un contexte de test, **mais pas du tout dans un contexte de production.**
+
+- Déclaration d'une bean **PasswordEncoder**
+
+```java
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return PasswordEncoderFactories.createDelegatingPasswordEncoder();
+    }
+```
+
+Cette bean, en fonction du **préfixe indiqué dans la déclaration du mot de passe**, va faire déléguer le processus de déchiffrage à la bonne instance de `PasswordEncoder`.
+
+- Les mots de passe ont été remplacés **par des chaînes chiffrées en bcrypt**, afin que la bean `passwordEncoder` puisse les déchiffrer correctement : 
+
+```java
+    @Bean
+    public UserDetailsService userDetailsService() {
+        UserDetails user = User.withUsername("user").password("{bcrypt}$2a$12$.eaRIKyqmV5OS6ycI5uW.O3iYfjeAyPk7DJwTekVGk3PbXxr3y3DS").authorities("read").build();
+        UserDetails admin = User.withUsername("admin").password("{bcrypt}$2a$12$.eaRIKyqmV5OS6ycI5uW.O3iYfjeAyPk7DJwTekVGk3PbXxr3y3DS").authorities("admin").build();
+        return new InMemoryUserDetailsManager(user, admin);
+    }
+```
+
+
 ### 1.1.0 - 2025-06-16
 
 #### :sparkles: Ajout de plusieurs utilisateurs en mémoire

@@ -7,6 +7,9 @@ import org.springframework.security.config.annotation.web.configurers.AbstractHt
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.factory.PasswordEncoderFactories;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 
@@ -54,11 +57,27 @@ public class SecurityConfig {
     public UserDetailsService userDetailsService() {
         // Une autorité désigne la permission d'un utilisateur
         // Les autorités saisies ici sont arbitraires
-        // L'ajout de {noop} indique qu'on utilise le password encoder "noop" (NoOpPasswordEncoder, il est obligatoire d'utiliser un password encoder)
-        UserDetails user = User.withUsername("user").password("{noop}password").authorities("read").build();
-        UserDetails admin = User.withUsername("admin").password("{noop}password").authorities("admin").build();
+        // On précise que les mots de passe ont été chiffrés en bcrypt, et que donc, notre bean passwordEncoder va utiliser BCryptPasswordEncoder pour déchiffrer cela.
+        UserDetails user = User.withUsername("user").password("{bcrypt}$2a$12$.eaRIKyqmV5OS6ycI5uW.O3iYfjeAyPk7DJwTekVGk3PbXxr3y3DS").authorities("read").build();
+        UserDetails admin = User.withUsername("admin").password("{bcrypt}$2a$12$.eaRIKyqmV5OS6ycI5uW.O3iYfjeAyPk7DJwTekVGk3PbXxr3y3DS").authorities("admin").build();
         // Chaque user sera stocké dans une HashMap de InMemoryUserDetailsManager
         return new InMemoryUserDetailsManager(user, admin);
+    }
+
+    // On utilise l'algorithme bcrypt pour encoder et décoder les mots de passe
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        /*
+         * Par défaut, le chiffreur est BCryptPasswordEncoder, mais on peut préciser un autre algorithme
+         * avec le bon préfixe, comme {noop}, {ldap} au niveau de la déclaration des mots de passe.
+         *
+         * Comme BCryptPasswordEncoder est par défaut, il est aussi possible de retourner directement une nouvelle instance :
+         *
+         * return new BCryptPasswordEncoder();
+         *
+         * Mais pour des questions de flexibilité, on passe par le processus de délégation par le préfixe.
+         */
+        return PasswordEncoderFactories.createDelegatingPasswordEncoder();
     }
 
 }
