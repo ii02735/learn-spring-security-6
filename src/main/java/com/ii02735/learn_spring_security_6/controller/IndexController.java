@@ -4,10 +4,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-public class HelloController {
+public class IndexController {
 
-    @GetMapping("/hello")
-    public String hello() {
-        return "Hello World user";
+    @GetMapping("")
+    public String index() {
+        return "This is the index page : everyone has access to it";
     }
+
 }

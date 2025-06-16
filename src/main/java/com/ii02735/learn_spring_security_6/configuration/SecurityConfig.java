@@ -16,7 +16,21 @@ public class SecurityConfig {
      */
     @Bean
     SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http) throws Exception {
-        http.authorizeHttpRequests((requests) -> requests.anyRequest().authenticated());
+
+        /* - N'accepter que les requêtes authentifiées (configuration par défaut)
+         * http.authorizeHttpRequests((requests) -> requests.anyRequest().authenticated());
+         *
+         * - Refuser n'importe quelle requête (aboutira à une 403, utilisation très rare. Mais peut être utile s'il faut refuser des requêtes en provenance de certaines APIs)
+         * http.authorizeHttpRequests((requests) -> requests.anyRequest().denyAll());
+         *
+         * - Accepter n'importe quelle requête (attention : plus besoin d'authentification / Spring Security) !
+         * http.authorizeHttpRequests((requests) -> requests.anyRequest().permitAll());
+         */
+
+        // Ne permettre que certaines ressources accessibles publiquement
+        http.authorizeHttpRequests((requests) -> requests.requestMatchers("/").permitAll());
+        http.authorizeHttpRequests((requests) -> requests.requestMatchers("/hello").authenticated());
+
         http.formLogin(withDefaults());
         http.httpBasic(withDefaults());
         return http.build();
