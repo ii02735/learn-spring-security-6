@@ -2,6 +2,8 @@
 
 #### :sparkles: Utilisation d'un algorithme pour chiffrer les mots de passe
 
+Car précédemment, les mots de passe étaient stockés en **clair** : ce qui est acceptable dans un contexte de test, **mais pas du tout dans un contexte de production.**
+
 - Déclaration d'une bean **PasswordEncoder**
 
 ```java

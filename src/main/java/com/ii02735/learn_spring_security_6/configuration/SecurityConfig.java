@@ -69,7 +69,13 @@ public class SecurityConfig {
     public PasswordEncoder passwordEncoder() {
         /*
          * Par défaut, le chiffreur est BCryptPasswordEncoder, mais on peut préciser un autre algorithme
-         * avec le bon préfixe, comme {noop}, {ldap} au niveau de la déclaration des mots de passe
+         * avec le bon préfixe, comme {noop}, {ldap} au niveau de la déclaration des mots de passe.
+         *
+         * Comme BCryptPasswordEncoder est par défaut, il est aussi possible de retourner directement une nouvelle instance :
+         *
+         * return new BCryptPasswordEncoder();
+         *
+         * Mais pour des questions de flexibilité, on passe par le processus de délégation par le préfixe.
          */
         return PasswordEncoderFactories.createDelegatingPasswordEncoder();
     }
