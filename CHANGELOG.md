@@ -1,3 +1,12 @@
+### 2.0.0 - 2025-06-16
+
+#### :boom: Utilisation d'une BDD MariaDB pour stockage des utilisateurs (JdbcUserDetailsManager)
+
+- Ajout d'une stack compose avec un service **mariadb**
+- Ajout des dépendances nécessaires pour la connexion à la BDD
+- Ajout de **flyway** pour exécution des **scripts nécessaires** pour JdbcDaoImpl
+- **Suppression de l'utilisation de `InMemoryUserDetailsManager`**
+
 ### 1.2.0 - 2025-06-16
 
 #### :sparkles: Utilisation d'un algorithme pour chiffrer les mots de passe
