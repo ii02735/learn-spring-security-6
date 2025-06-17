@@ -1,3 +1,11 @@
+### 2.2.0 - 2025-06-17
+
+#### :sparkles: Création d'un controller pour inscrire un nouvel utilisateur
+
+- Création d'un RestController basique : **UserController**
+- Désactivation CSRF pour utilisation du RestController ( :warning: temporaire ! )
+- Fix sur la migration de suppression des tables par défaut de Spring Security
+
 ### 2.1.0 - 2025-06-17
 
 #### :sparkles: Utilisation d'une représentation custom d'un utilisateur pour Spring Security

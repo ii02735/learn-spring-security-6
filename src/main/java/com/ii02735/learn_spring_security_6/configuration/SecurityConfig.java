@@ -3,6 +3,7 @@ package com.ii02735.learn_spring_security_6.configuration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
@@ -18,7 +19,8 @@ public class SecurityConfig {
      */
     @Bean
     SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http) throws Exception {
-
+        // TODO: nécessité temporaire pour faire fonctionner les RestControllers (à supprimer)
+        http.csrf(AbstractHttpConfigurer::disable);
         /* - N'accepter que les requêtes authentifiées (configuration par défaut)
          * http.authorizeHttpRequests((requests) -> requests.anyRequest().authenticated());
          *
@@ -31,7 +33,7 @@ public class SecurityConfig {
 
         // Ne permettre que certaines ressources accessibles publiquement
         http.authorizeHttpRequests((requests) -> requests
-                .requestMatchers("/").permitAll()
+                .requestMatchers("/", "/register").permitAll()
                 .requestMatchers("/hello").authenticated());
 
         // Permet d'afficher un formulaire d'authentification (pour utilisateurs) : déclenchera UsernamePasswordAuthenticationFilter
