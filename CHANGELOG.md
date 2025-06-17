@@ -1,3 +1,12 @@
+### 2.3.0 - 2025-06-17
+
+#### :sparkles: Création d'une implémentation AuthenticationProvider custom
+
+Cette implémentation reprend en réalité la logique de `DaoAuthenticationProvider`.
+
+Il s'agit d'un proof of concept, expliquant qu'on peut ajouter notre propre logique, dans le flux d'authentification.
+
+
 ### 2.2.0 - 2025-06-17
 
 #### :sparkles: Création d'un controller pour inscrire un nouvel utilisateur
