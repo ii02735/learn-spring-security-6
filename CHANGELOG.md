@@ -1,3 +1,9 @@
+### 2.4.0 - 2025-06-17
+
+#### :sparkles: Création d'une seconde implémentation AuthenticationProvider pour environnement hors-prod
+
+Cette implémentation se nomme `TestingCustomerAuthenticationProvider` : on ne vérifie que l'adresse mail, **n'importe quel mot de passe peut être utilisé**.
+
 ### 2.3.0 - 2025-06-17
 
 #### :sparkles: Création d'une implémentation AuthenticationProvider custom
