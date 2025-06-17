@@ -1,3 +1,13 @@
+### 2.1.0 - 2025-06-17
+
+#### :sparkles: Utilisation d'une représentation custom d'un utilisateur pour Spring Security
+
+- Création d'une entité JPA arbitraire représentant un user
+- Création d'une table représentant cette entité
+- Création d'un service custom implémentant `UserDetailsService` : **CustomerUserDetailsService**
+  - Ce service a sa propre logique **pour loadUserByUsername** : on utilise un **repository Spring Data** + logique de correspondance avec les autorités
+- Suppression de la bean **UserDetailsService** qui utilisait **JbcUserDetailsManager** (puisque la logique est réécrite dans **CustomerUserDetailsService**)
+
 ### 2.0.0 - 2025-06-16
 
 #### :boom: Utilisation d'une BDD MariaDB pour stockage des utilisateurs (JdbcUserDetailsManager)
