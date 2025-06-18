@@ -1,5 +1,6 @@
 package com.ii02735.learn_spring_security_6.configuration;
 
+import com.ii02735.learn_spring_security_6.exception_handling.CustomerAuthenticationAccessDeniedHandler;
 import com.ii02735.learn_spring_security_6.exception_handling.CustomerAuthenticationEntryPoint;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -45,6 +46,7 @@ public class SecurityConfig {
          */
         // Permet d'accepter l'authentification basic (pour APIs) : déclenchera BasicAuthenticationFilter
         http.httpBasic(httpSecurityHttpBasicConfigurer -> httpSecurityHttpBasicConfigurer.authenticationEntryPoint(new CustomerAuthenticationEntryPoint()));
+        http.exceptionHandling(httpSecurityExceptionHandlingConfigurer -> httpSecurityExceptionHandlingConfigurer.accessDeniedHandler(new CustomerAuthenticationAccessDeniedHandler()));
         return http.build();
     }
 
