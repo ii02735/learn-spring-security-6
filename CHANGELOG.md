@@ -1,3 +1,11 @@
+### 2.5.0 - 2025-06-18
+
+#### :sparkles: Création d'une implémentation custom `AuthenticationEntryPoint`
+
+Par défaut, Spring Security **renvoie une réponse vide** en cas **d'erreur 401**.
+
+On peut personnaliser ce comportement à l'aide d'une implémentation custom de `AuthenticationEntryPoint`.
+
 ### 2.4.0 - 2025-06-17
 
 #### :sparkles: Création d'une seconde implémentation AuthenticationProvider pour environnement hors-prod

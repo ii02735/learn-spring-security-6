@@ -1,5 +1,6 @@
 package com.ii02735.learn_spring_security_6.configuration;
 
+import com.ii02735.learn_spring_security_6.exception_handling.CustomerAuthenticationEntryPoint;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -43,7 +44,7 @@ public class SecurityConfig {
          * http.formLogin(AbstractHttpConfigurer::disable);
          */
         // Permet d'accepter l'authentification basic (pour APIs) : déclenchera BasicAuthenticationFilter
-        http.httpBasic(withDefaults());
+        http.httpBasic(httpSecurityHttpBasicConfigurer -> httpSecurityHttpBasicConfigurer.authenticationEntryPoint(new CustomerAuthenticationEntryPoint()));
         return http.build();
     }
 
