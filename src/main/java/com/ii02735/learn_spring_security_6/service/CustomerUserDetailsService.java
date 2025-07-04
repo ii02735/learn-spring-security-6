@@ -9,8 +9,6 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-
 @Service
 @RequiredArgsConstructor
 public class CustomerUserDetailsService implements UserDetailsService {
@@ -20,7 +18,7 @@ public class CustomerUserDetailsService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         final var customer = this.customerRepository.findByEmail(username).orElseThrow(() -> new UsernameNotFoundException("Customer not found from email: " + username));
-        final var authorities = List.of(new SimpleGrantedAuthority(customer.getRole()));
+        var authorities = customer.getAuthorities().stream().map(authority -> new SimpleGrantedAuthority(authority.getName())).toList();
         return new User(customer.getEmail(), customer.getPassword(), authorities);
     }
 }

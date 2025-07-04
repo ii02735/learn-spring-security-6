@@ -1,3 +1,12 @@
+### 2.6.0 - 2025-07-05
+
+#### :boom: Début de l'implémentation de la gestion **d'autorités / permissions**
+
+- Création d'une table `authorities` qui contiendra les **autorités** des utilisateurs
+- Création de l'entité JPA **Authority**
+- Suppression de la colonne `role` de la table des utilisateurs (créée pour rien au départ)
+- Mise à jour de la classe **CustomerUsersDetailsService** pour charger les **autorités** dans les informations de l'utilisateur
+
 ### 2.5.0 - 2025-06-18
 
 #### :sparkles: Création d'une implémentation custom `AuthenticationEntryPoint`
