@@ -1,3 +1,10 @@
+### 2.8.0 - 2025-07-06
+
+:sparkles: **Ajout d'un filter personnalisé**
+
+- Création de la classe `LoggingAuthenticationFilter` : va logger les infos de l'utilisateur authentifié
+- Ce filter sera exécuté après le filter `UsernamePasswordAuthenticationFilter`
+
 ### 2.7.1 - 2025-07-05
 
 #### :bug: Débogage de Spring Security
