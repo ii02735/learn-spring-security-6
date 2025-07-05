@@ -1,3 +1,11 @@
+### 2.7.1 - 2025-07-05
+
+#### :bug: Débogage de Spring Security
+
+- Création d'une nouvelle bean permettant d'activer le débogage
+  - Ce comportement est aussi possible par l'annotation `@EnableWebSecurity(debug = true)` 
+- Cette bean est activable via une property personnalisée : `app.web-security.debug`
+
 ### 2.7.0 - 2025-07-05
 
 - Création d'un **rôle** comme **authority**.

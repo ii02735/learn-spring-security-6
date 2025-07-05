@@ -2,9 +2,11 @@ package com.ii02735.learn_spring_security_6.configuration;
 
 import com.ii02735.learn_spring_security_6.exception_handling.CustomerAuthenticationAccessDeniedHandler;
 import com.ii02735.learn_spring_security_6.exception_handling.CustomerAuthenticationEntryPoint;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -14,6 +16,16 @@ import static org.springframework.security.config.Customizer.withDefaults;
 
 @Configuration
 public class SecurityConfig {
+
+    @Bean
+    @ConditionalOnProperty(name = "app.web-security.debug", havingValue = "true")
+    /*
+     * Fournit des informations détaillées de Spring Security (notamment pour les filters)
+     * Permet d'éviter d'ajouter @EnableWebSecurity(debug = true)
+     */
+    public WebSecurityCustomizer enableDebugWebSecurity() {
+        return web -> web.debug(true);
+    }
 
     /**
      * Reprise de la bean par défaut de Spring Security depuis SpringBootWebSecurityConfiguration
