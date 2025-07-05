@@ -10,4 +10,9 @@ public class HelloController {
     public String hello() {
         return "Hello World user";
     }
+
+    @GetMapping("/write")
+    public String write() {
+        return "Page that'll have the capacity to write things";
+    }
 }
