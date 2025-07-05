@@ -1,3 +1,11 @@
+### 2.7.0 - 2025-07-05
+
+- Création d'un **rôle** comme **authority**.
+
+Spring sait distinguer un rôle par rapport à une authority classique par le **préfixe `ROLE_`**.
+
+- Création d'un endpoint avec droit d'admin uniquement
+
 ### 2.6.0 - 2025-07-05
 
 #### :boom: Début de l'implémentation de la gestion **d'autorités / permissions**

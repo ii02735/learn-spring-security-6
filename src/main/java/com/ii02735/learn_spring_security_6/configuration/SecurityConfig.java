@@ -36,7 +36,8 @@ public class SecurityConfig {
         // Ne permettre que certaines ressources accessibles publiquement
         http.authorizeHttpRequests((requests) -> requests
                 .requestMatchers("/", "/register").permitAll()
-                .requestMatchers("/write").hasAuthority("write")
+                .requestMatchers("/write").hasAuthority("write") // ou hasAnyAuthority pour passer plusieurs autorités
+                .requestMatchers("/admin").hasRole("ADMIN")
                 .requestMatchers("/hello").authenticated());
 
         // Permet d'afficher un formulaire d'authentification (pour utilisateurs) : déclenchera UsernamePasswordAuthenticationFilter
